@@ -27,7 +27,15 @@ function onClick(event) {
     const imageSource = event.target.dataset.source;
     instance = basicLightbox.create(`
     <img src="${imageSource}" class="gallery__image">
-`);
+`,
+        {  onShow: () => {
+        document.addEventListener('keydown', onKeyDown);
+      },
+      onClose: () => {
+        document.removeEventListener('keydown', onKeyDown);
+      }
+        
+    });
     instance.show();
     document.addEventListener('keydown',onKeyDown)
 };
@@ -39,6 +47,7 @@ function onKeyDown(event) {
     }
    
 }
+
 
 // console.log(galleryItems);
 
